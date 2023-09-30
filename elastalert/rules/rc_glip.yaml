@@ -1,0 +1,20 @@
+es_host: your.elasticsearch.domain
+es_port: 9200
+
+name: RingCentral Glip Alert
+
+index: "your-elk-index-*"
+
+type: frequency
+
+filter:
+- query:
+    query_string:
+       query: "logLevel : ERROR"
+
+num_events: 1
+timeframe:
+  hours: 1  
+
+alert: "elastalert_modules.glip.GlipAlerter"
+glip_webhook_url: "https://hooks.ringcentral.com/webhook/v2/XYZ"
